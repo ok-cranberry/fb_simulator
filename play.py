@@ -5,7 +5,7 @@ class Quarterback:
         self.name = name
         setattr(self, "accuracy", random.randrange(1,20))
 
-class WideReciever:
+class WideReceiver:
     def __init__(self, name):
         self.name = name
         setattr(self, "catching", random.randrange(1,20))
@@ -28,9 +28,21 @@ def presnap():
 
 def action(quarterback, wide_receiver, defensive_back):
     print("It's a pass!")
+    i = 0
+    play_outcomes = []
+    while i<100:
+        outcome = weights(0.6) * quarterback.accuracy + weights(0.4) * wide_receiver.catching - weights(0.5) * defensive_back.coverage
+        play_outcomes.append(outcome)
+        i += 1
 
-    outcome = weights(0.6) * quarterback.accuracy + weights(0.4) * wide_receiver.catching - weights(0.5) * defensive_back.coverage
-    print(outcome)
+    avg_outcome = sum(play_outcomes)/len(play_outcomes)
+
+    if avg_outcome > 1:
+        print(f"It's caught by {wide_receiver.name}!!")
+    elif avg_outcome <= -1:
+        print(f"{quarterback.name} is intercepted by {defensive_back.name}!!")
+    elif avg_outcome > -1 and avg_outcome <= 1:
+        print(f"It's incomplete!")
 
 
 def result():
@@ -39,7 +51,7 @@ def result():
 def main():
 
     QB = Quarterback("Charlie Manack")
-    WR = WideReciever("Hunter Patterson")
+    WR = WideReceiver("Hunter Patterson")
     DB = DefensiveBack("Chris Pierce")
 
     # print(QB.accuracy)
