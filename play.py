@@ -23,8 +23,10 @@ def weights(nominal_weight):
     return nominal_weight * random.gauss(0.5, 1/3)
 
 
-def presnap():
-    pass
+def presnap(quarterback, wide_receiver, defensive_back):
+    """TODO: Add functionality for the teams to apply some weight to the ensuing play"""
+
+    print(f"{quarterback.name} brings his team up to the line")
 
 def action(quarterback, wide_receiver, defensive_back):
     print("It's a pass!")
@@ -45,7 +47,8 @@ def action(quarterback, wide_receiver, defensive_back):
         print(f"It's incomplete!")
 
 
-def result():
+def result(quarterback, wide_receiver, defensive_back):
+    """Update the down, distance, and score"""
     pass
 
 def main():
@@ -54,13 +57,9 @@ def main():
     WR = WideReceiver("Hunter Patterson")
     DB = DefensiveBack("Chris Pierce")
 
-    # print(QB.accuracy)
-    # print(WR.catching)
-    # print(DB.coverage)
-
-    presnap()
+    presnap(QB, WR, DB)
     action(QB, WR, DB)
-    result()
+    result(QB, WR, DB)
 
 if __name__ == "__main__":
     main()
