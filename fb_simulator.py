@@ -1,5 +1,5 @@
 import positions
-import playfromscrimmage
+import drive as d
 
 
 def main():
@@ -8,8 +8,8 @@ def main():
     WR = positions.WideReceiver("Hunter Patterson")
     DB = positions.DefensiveBack("Chris Pierce")
 
-    play = playfromscrimmage.PlayFromScrimmage(20, QB, WR, DB)
-    play.play()
+    drive = d.Drive(20, QB, WR, DB)
+    drive.drive()
 
 
 if __name__ == "__main__":

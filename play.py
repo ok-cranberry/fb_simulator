@@ -7,7 +7,7 @@ def weights(nominal_weight):
 
     return nominal_weight * random.gauss(0.5, 1 / 3)
 
-class PlayFromScrimmage:
+class Play:
     def __init__(self, line_of_scrimmage, quarterback, wide_receiver, defensive_back):
         self.line_of_scrimmage = line_of_scrimmage
         self.quarterback = quarterback
@@ -23,7 +23,7 @@ class PlayFromScrimmage:
 
     def action(self,quarterback, wide_receiver, defensive_back):
 
-        # turnover = False
+        turnover = False
         yards_gained = 0
 
         print("It's a pass!")
@@ -47,21 +47,17 @@ class PlayFromScrimmage:
             print(f"That's a gain of {yards_gained}")
         elif avg_outcome <= -1:
             print(f"{quarterback.name} is intercepted by {defensive_back.name}!!")
-            # turnover = True
+            turnover = True
             # Function for Return Yards
         elif avg_outcome > -1 and avg_outcome <= 1:
             print(f"It's incomplete!")
+            yards_gained = 0
 
-        return yards_gained
-
-    def result(self, line_of_scrimmage, yards_gained):
-        """Update the down, distance, and score"""
-        line_of_scrimmage += yards_gained
-        if line_of_scrimmage >= 100:
-            print("TOUCHDOWN!!")
+        return yards_gained, turnover
 
 
-    def play(self):
+
+
+    def run_play(self):
         self.presnap(self.quarterback, self.wide_receiver, self.defensive_back)
-        yards_gained = self.action(self.quarterback, self.wide_receiver, self.defensive_back)
-        self.result(self.line_of_scrimmage, yards_gained)
+        return self.action(self.quarterback, self.wide_receiver, self.defensive_back)
