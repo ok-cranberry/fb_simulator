@@ -1,15 +1,14 @@
-import positions
-import drive as d
+from team import Team
+from game import Game
 
 
 def main():
 
-    QB = positions.Quarterback("Charlie Manack")
-    WR = positions.WideReceiver("Hunter Patterson")
-    DB = positions.DefensiveBack("Chris Pierce")
+    home_team = Team("Frazier")
+    away_team = Team("Geibel")
 
-    drive = d.Drive(20, QB, WR, DB)
-    drive.drive()
+    game = Game(home_team, away_team)
+    game.game()
 
 
 if __name__ == "__main__":
