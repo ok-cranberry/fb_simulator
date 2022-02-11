@@ -1,11 +1,13 @@
 import random
 
+
 def weights(nominal_weight):
     """Adds a random fudge factor to a play contribution weights
     nominal_weight : float - between 0-1
     """
 
     return nominal_weight * random.gauss(0.5, 1 / 3)
+
 
 class Play:
     def __init__(self, line_of_scrimmage, quarterback, wide_receiver, defensive_back):
@@ -16,12 +18,12 @@ class Play:
 
         yards_gained = 0
 
-    def presnap(self,quarterback, wide_receiver, defensive_back):
+    def presnap(self, quarterback, wide_receiver, defensive_back):
         """TODO: Add functionality for the teams to apply some weight to the ensuing play"""
 
         print(f"{quarterback.name} brings his team up to the line")
 
-    def action(self,quarterback, wide_receiver, defensive_back):
+    def action(self, quarterback, wide_receiver, defensive_back):
 
         turnover = False
         yards_gained = 0
@@ -54,9 +56,6 @@ class Play:
             yards_gained = 0
 
         return yards_gained, turnover
-
-
-
 
     def run_play(self):
         self.presnap(self.quarterback, self.wide_receiver, self.defensive_back)
