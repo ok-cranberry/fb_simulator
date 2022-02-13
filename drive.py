@@ -1,13 +1,16 @@
 import play as p
+from team import Team
 
 
 class Drive:
-    def __init__(self, starting_yardline, quarterback, wide_receiver, defensive_back):
+    def __init__(
+        self,
+        starting_yardline,
+        team: Team,
+    ):
         self.starting_yardline = starting_yardline
         self.current_yardline = starting_yardline
-        self.quarterback = quarterback
-        self.wide_receiver = wide_receiver
-        self.defensive_back = defensive_back
+        self.team = team
 
         self.drive_yardage = 0
         self.score = 0
@@ -40,9 +43,9 @@ class Drive:
             print(f"It's {down} down and {yards_to_1st_down}")
             play = p.Play(
                 yardline,
-                self.quarterback,
-                self.wide_receiver,
-                self.defensive_back,
+                self.team.quarterback,
+                self.team.wide_receiver,
+                self.team.defensive_back,
             )
             yards_gained, turnover = play.run_play()
             self.drive_yardage += yards_gained
