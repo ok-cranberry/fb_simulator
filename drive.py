@@ -21,7 +21,9 @@ class Drive:
         return line_of_scrimmage
 
     def update_down(self, down, yards_to_1st_down, yards_gained):
-        """Update the numbered down.  Plays of 10 yards are more reset the down to 1. Plays less than 10 yards reduce the yards to gain until 10 yards hve been gained"""
+        """Update the numbered down.  Plays of 10 yards are more reset the down
+        to 1. Plays less than 10 yards reduce the yards to gain until 10 yards
+        have been gained"""
         if yards_gained < yards_to_1st_down:
             down += 1
             yards_to_1st_down -= yards_gained
@@ -34,7 +36,6 @@ class Drive:
     def drive(self):
 
         end_of_drive = False
-        yardline = self.starting_yardline
         down = 1
         yards_to_1st_down = 10
         self.score = 0
@@ -42,7 +43,7 @@ class Drive:
         while end_of_drive is False:
             print(f"It's {down} down and {yards_to_1st_down}")
             play = p.Play(
-                yardline,
+                self.current_yardline,
                 self.team.quarterback,
                 self.team.wide_receiver,
                 self.team.defensive_back,
@@ -50,7 +51,9 @@ class Drive:
             yards_gained, turnover = play.run_play()
             self.drive_yardage += yards_gained
 
-            yardline = self.update_distance(yardline, yards_gained)
+            self.current_yardline = self.update_distance(
+                self.current_yardline, yards_gained
+            )
             down, yards_to_1st_down = self.update_down(
                 down, yards_to_1st_down, yards_gained
             )
@@ -60,7 +63,7 @@ class Drive:
             if down > 4:
                 print("That's a turnover on downs")
                 end_of_drive = True
-            if yardline >= 100:
+            if self.current_yardline >= 100:
                 print("TOUCHDOWN!!")
                 self.score += 7
                 end_of_drive = True
