@@ -58,8 +58,7 @@ class Game:
 
             # away team drive
             away_team_drive = drive.Drive(
-                yardline,
-                self.away_team,
+                yardline, self.away_team, self.home_team
             )
             away_team_drive.drive()
 
@@ -72,8 +71,7 @@ class Game:
 
             # home team drive
             home_team_drive = drive.Drive(
-                yardline,
-                self.home_team,
+                yardline, self.home_team, self.away_team
             )
             home_team_drive.drive()
 

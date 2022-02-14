@@ -1,4 +1,5 @@
 import random
+from team import Team
 
 
 def weights(nominal_weight):
@@ -10,15 +11,19 @@ def weights(nominal_weight):
 
 
 class Play:
-    def __init__(self, line_of_scrimmage, quarterback, wide_receiver, defensive_back):
+    def __init__(
+        self,
+        line_of_scrimmage,
+        offense,
+        defense,
+    ):
         self.line_of_scrimmage = line_of_scrimmage
-        self.quarterback = quarterback
-        self.wide_receiver = wide_receiver
-        self.defensive_back = defensive_back
+        self.offense = offense
+        self.defense = defense
 
         yards_gained = 0
 
-    def presnap(self, quarterback, wide_receiver, defensive_back):
+    def presnap(self, quarterback):
         """TODO: Add functionality for the teams to apply some weight to the ensuing play"""
 
         print(f"{quarterback.name} brings his team up to the line")
@@ -48,7 +53,9 @@ class Play:
             # will need to modify to take a distribution into account or to change the weights
             print(f"That's a gain of {yards_gained}")
         elif avg_outcome <= -1:
-            print(f"{quarterback.name} is intercepted by {defensive_back.name}!!")
+            print(
+                f"{quarterback.name} is intercepted by {defensive_back.name}!!"
+            )
             turnover = True
             # Function for Return Yards
         elif avg_outcome > -1 and avg_outcome <= 1:
@@ -58,5 +65,9 @@ class Play:
         return yards_gained, turnover
 
     def run_play(self):
-        self.presnap(self.quarterback, self.wide_receiver, self.defensive_back)
-        return self.action(self.quarterback, self.wide_receiver, self.defensive_back)
+        self.presnap(self.offense.quarterback)
+        return self.action(
+            self.offense.quarterback,
+            self.offense.wide_receiver,
+            self.defense.defensive_back,
+        )
