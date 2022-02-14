@@ -13,6 +13,9 @@ class Game:
         self.home_yardage = 0
         self.away_yardage = 0
 
+    def coin_toss(self):
+        pass
+
     def find_starting_yardline(self, drive: drive.Drive):
         if drive.current_yardline < 100:
             # if the team did not score TD
@@ -49,7 +52,7 @@ class Game:
 
     def game(self):
 
-        # TODO coin toss
+        self.coin_toss()
 
         # game's starting yardline
         yardline = 20
