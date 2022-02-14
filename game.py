@@ -38,6 +38,15 @@ class Game:
                 f"Wow, what an even game! That's it for us here, with {away_team.name} and {home_team.name} ending in a tied game, knotted up at {home_score} "
             )
 
+    def print_score(self):
+        """Prints the score based on the result of a Drive
+
+        drive - Drive object type
+        """
+        print(
+            f"{self.away_team.name}: {self.away_score} - {self.home_team.name}: {self.home_score}"
+        )
+
     def game(self):
 
         # TODO coin toss
@@ -47,28 +56,30 @@ class Game:
 
         for i in range(6):
 
+            # away team drive
             away_team_drive = drive.Drive(
                 yardline,
                 self.away_team,
             )
             away_team_drive.drive()
+
             self.away_score += away_team_drive.score
-            print(
-                f"{self.away_team.name}: {self.away_score} - {self.home_team.name}: {self.home_score}"
-            )
+            self.print_score()
+
             self.away_yardage += away_team_drive.drive_yardage
 
             yardline = self.find_starting_yardline(away_team_drive)
 
+            # home team drive
             home_team_drive = drive.Drive(
                 yardline,
                 self.home_team,
             )
             home_team_drive.drive()
+
             self.home_score += home_team_drive.score
-            print(
-                f"{self.away_team.name}: {self.away_score} - {self.home_team.name}: {self.home_score}"
-            )
+            self.print_score()
+
             self.home_yardage += home_team_drive.drive_yardage
 
             yardline = self.find_starting_yardline(home_team_drive)
