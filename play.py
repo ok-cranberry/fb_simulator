@@ -1,5 +1,6 @@
 import random
 from team import Team
+from clock import GameClock
 
 
 def weights(nominal_weight):
@@ -11,15 +12,11 @@ def weights(nominal_weight):
 
 
 class Play:
-    def __init__(
-        self,
-        line_of_scrimmage,
-        offense,
-        defense,
-    ):
+    def __init__(self, line_of_scrimmage, offense, defense, break_huddle_time):
         self.line_of_scrimmage = line_of_scrimmage
         self.offense = offense
         self.defense = defense
+        self.break_huddle_time = break_huddle_time
 
         yards_gained = 0
 
@@ -27,6 +24,11 @@ class Play:
         """TODO: Add functionality for the teams to apply some weight to the ensuing play"""
 
         print(f"{quarterback.name} brings his team up to the line")
+
+    def duration_presnap(self):
+        """determine the time elapsed from huddle break to snap"""
+
+        pass
 
     def action(self, quarterback, wide_receiver, defensive_back):
 

@@ -1,5 +1,6 @@
 import drive
 from team import Team
+import clock
 
 
 class Game:
@@ -12,6 +13,8 @@ class Game:
         self.away_score = 0
         self.home_yardage = 0
         self.away_yardage = 0
+        self.clock = clock.GameClock()
+        self.quarter = 1
 
     def coin_toss(self):
         pass
@@ -52,38 +55,42 @@ class Game:
 
     def game(self):
 
+        print(self.clock.get_current_time())
+
         self.coin_toss()
 
-        # game's starting yardline
+        # game's/half's starting yardline
         yardline = 20
 
-        for i in range(6):
+        while self.quarter <= 4:
 
-            # away team drive
-            away_team_drive = drive.Drive(
-                yardline, self.away_team, self.home_team
-            )
-            away_team_drive.drive()
+            while self.clock.get_current_time() < 0:
+                away_team_drive = drive.Drive(
+                    yardline, self.away_team, self.home_team
+                )
+                away_team_drive.drive()
 
-            self.away_score += away_team_drive.score
-            self.print_score()
+                self.away_score += away_team_drive.score
+                self.print_score()
 
-            self.away_yardage += away_team_drive.drive_yardage
+                self.away_yardage += away_team_drive.drive_yardage
 
-            yardline = self.find_starting_yardline(away_team_drive)
+                yardline = self.find_starting_yardline(away_team_drive)
 
-            # home team drive
-            home_team_drive = drive.Drive(
-                yardline, self.home_team, self.away_team
-            )
-            home_team_drive.drive()
+                # home team drive
+                home_team_drive = drive.Drive(
+                    yardline, self.home_team, self.away_team
+                )
+                home_team_drive.drive()
 
-            self.home_score += home_team_drive.score
-            self.print_score()
+                self.home_score += home_team_drive.score
+                self.print_score()
 
-            self.home_yardage += home_team_drive.drive_yardage
+                self.home_yardage += home_team_drive.drive_yardage
 
-            yardline = self.find_starting_yardline(home_team_drive)
+                yardline = self.find_starting_yardline(home_team_drive)
+
+            self.quarter += 1
 
         # declare winner
         self.final_score(
