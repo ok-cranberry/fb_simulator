@@ -38,7 +38,7 @@ class Game:
             )
         else:
             print(
-                f"Wow, what an even game! That's it for us here, with {away_team.name} and {home_team.name} ending in a tied game, knotted up at {home_score} "
+                f"Wow, what an even game! That's it for us here, with {self.away_team.name} and {self.home_team.name} ending in a tied game, knotted up at {home_score} "
             )
 
     def print_score(self):
