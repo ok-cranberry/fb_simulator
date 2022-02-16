@@ -41,6 +41,9 @@ class Drive:
         yards_to_1st_down = 10
         self.score = 0
 
+        if self.clock.get_current_time() is 0:
+            end_of_drive = True
+
         while end_of_drive is False:
             print(f"It's {down} down and {yards_to_1st_down}")
             play = p.Play(
@@ -65,5 +68,5 @@ class Drive:
                 print("TOUCHDOWN!!")
                 self.score += 7
                 end_of_drive = True
-            if self.clock.get_current_time() <= 0:
+            if self.clock.get_current_time() is 0:
                 end_of_drive = True

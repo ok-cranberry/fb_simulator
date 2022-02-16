@@ -24,9 +24,8 @@ class Play:
         """TODO: Add functionality for the teams to apply some weight to the ensuing play"""
 
         print(f"{quarterback.name} brings his team up to the line")
-        self.clock.intra_play_duration(30)
-        print(self.clock.get_current_time())
         print(self.clock.format_clock())
+        self.clock.intra_play_duration(30)
 
     def action(self, quarterback, wide_receiver, defensive_back):
 
@@ -69,8 +68,12 @@ class Play:
 
     def run_play(self):
         self.presnap(self.offense.quarterback)
-        return self.action(
-            self.offense.quarterback,
-            self.offense.wide_receiver,
-            self.defense.defensive_back,
-        )
+        if not self.clock.get_current_time() <= 0:
+            return self.action(
+                self.offense.quarterback,
+                self.offense.wide_receiver,
+                self.defense.defensive_back,
+            )
+        else:
+            print("Oh they couldn't get the play off in time")
+            return (0, False)

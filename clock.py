@@ -10,7 +10,7 @@ class GameClock:
         """Outputs the minutes and seconds in MM:SS form"""
 
         clock_value = self.current_time
-        # 176 = 2:56
+
         minute = int(clock_value / 60)
         second = clock_value - (minute * 60)
 
@@ -18,7 +18,11 @@ class GameClock:
 
     def update_clock(self, time: int):
         """Updates the current time remaining in the quarter"""
-        self.current_time -= time
+        # If the elapsed time is greater than the time left, return 0:00
+        if self.current_time < time:
+            self.current_time = 0
+        else:
+            self.current_time -= time
 
     def play_duration(self, time: int):
         """determines the time elapsed during a single play"""
