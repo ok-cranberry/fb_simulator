@@ -12,11 +12,11 @@ def weights(nominal_weight):
 
 
 class Play:
-    def __init__(self, line_of_scrimmage, offense, defense, break_huddle_time):
+    def __init__(self, line_of_scrimmage, offense, defense, clock: GameClock):
         self.line_of_scrimmage = line_of_scrimmage
         self.offense = offense
         self.defense = defense
-        self.break_huddle_time = break_huddle_time
+        self.clock = clock
 
         yards_gained = 0
 
@@ -24,11 +24,9 @@ class Play:
         """TODO: Add functionality for the teams to apply some weight to the ensuing play"""
 
         print(f"{quarterback.name} brings his team up to the line")
-
-    def duration_presnap(self):
-        """determine the time elapsed from huddle break to snap"""
-
-        pass
+        self.clock.intra_play_duration(30)
+        print(self.clock.get_current_time())
+        print(self.clock.format_clock())
 
     def action(self, quarterback, wide_receiver, defensive_back):
 
@@ -54,15 +52,18 @@ class Play:
             yards_gained = int(avg_outcome * 5)
             # will need to modify to take a distribution into account or to change the weights
             print(f"That's a gain of {yards_gained}")
+            self.clock.play_duration(12)
         elif avg_outcome <= -1:
             print(
                 f"{quarterback.name} is intercepted by {defensive_back.name}!!"
             )
+            self.clock.play_duration(12)
             turnover = True
             # Function for Return Yards
         elif avg_outcome > -1 and avg_outcome <= 1:
             print(f"It's incomplete!")
             yards_gained = 0
+            self.clock.play_duration(8)
 
         return yards_gained, turnover
 

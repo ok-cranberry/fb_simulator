@@ -1,13 +1,17 @@
 import play as p
 from team import Team
+from clock import GameClock
 
 
 class Drive:
-    def __init__(self, starting_yardline, offense: Team, defense: Team):
+    def __init__(
+        self, starting_yardline, offense: Team, defense: Team, clock: GameClock
+    ):
         self.starting_yardline = starting_yardline
         self.current_yardline = starting_yardline
         self.offense = offense
         self.defense = defense
+        self.clock = clock
 
         self.drive_yardage = 0
         self.score = 0
@@ -40,9 +44,7 @@ class Drive:
         while end_of_drive is False:
             print(f"It's {down} down and {yards_to_1st_down}")
             play = p.Play(
-                self.current_yardline,
-                self.offense,
-                self.defense,
+                self.current_yardline, self.offense, self.defense, self.clock
             )
             yards_gained, turnover = play.run_play()
             self.drive_yardage += yards_gained
@@ -62,4 +64,6 @@ class Drive:
             if self.current_yardline >= 100:
                 print("TOUCHDOWN!!")
                 self.score += 7
+                end_of_drive = True
+            if self.clock.get_current_time() <= 0:
                 end_of_drive = True
