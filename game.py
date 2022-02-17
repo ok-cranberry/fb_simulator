@@ -11,10 +11,6 @@ class Game:
 
         self.score = {self.home_team: 0, self.away_team: 0}
         self.yardage = {self.home_team: 0, self.away_team: 0}
-        self.home_score = 0
-        self.away_score = 0
-        self.home_yardage = 0
-        self.away_yardage = 0
         self.clock = clock.GameClock()
         self.quarter = 1
 
