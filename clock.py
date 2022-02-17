@@ -38,3 +38,7 @@ class GameClock:
         """returns the current time left in the quarter (in seconds)"""
 
         return self.current_time
+
+    def reset_clock_for_quarter(self):
+        """resets the game clock to self.quarter_length_minutes"""
+        self.current_time = self.quarter_length_minutes * 60
