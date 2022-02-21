@@ -1,6 +1,7 @@
 from drive import Drive
 from team import Team
 import clock
+import random
 
 
 class Game:
@@ -11,11 +12,18 @@ class Game:
 
         self.score = {self.home_team: 0, self.away_team: 0}
         self.yardage = {self.home_team: 0, self.away_team: 0}
+        self.home_team.possessions = 0
         self.clock = clock.GameClock()
         self.quarter = 1
+        self.opening_possession = ()
 
     def coin_toss(self):
-        pass
+        flip = random.randint(0, 1)
+        if flip == 0:
+            # away team gets first possessions
+            self.opening_possession = (self.away_team, self.home_team)
+        else:
+            self.opening_possession = (self.home_team, self.away_team)
 
     def find_starting_yardline(self, drive: Drive):
         if drive.current_yardline < 100:
@@ -65,14 +73,17 @@ class Game:
     def game(self):
 
         print(self.clock.get_current_time())
+        print(self.home_team.possessions)
 
         self.coin_toss()
 
         # game's/half's starting yardline
         yardline = 20
 
-        while self.quarter < 5:
+        while self.quarter <= 4:
+            # run alternating possessions for home and away teams
             while self.clock.get_current_time() > 0:
+
                 self.new_possesion(yardline, self.away_team, self.home_team)
                 self.new_possesion(yardline, self.home_team, self.away_team)
 
