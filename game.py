@@ -6,7 +6,6 @@ import random
 
 class Game:
     def __init__(self, home_team, away_team):
-        """for now, this will be 3 drives per half for each team, no kickoffs"""
         self.home_team = home_team
         self.away_team = away_team
 
