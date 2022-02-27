@@ -15,6 +15,8 @@ class Game:
         self.clock = clock.GameClock()
         self.quarter = 1
         self.opening_possession = ()
+        self.winner = None
+        self.loser = None
 
     def coin_toss(self):
         flip = random.randint(0, 1)
@@ -40,10 +42,15 @@ class Game:
             print(
                 f"And that's your Final, with {self.home_team.name} winning {home_score} to {away_score}"
             )
+            self.winner = self.home_team
+            self.loser = self.away_team
+
         elif away_score > home_score:
             print(
                 f"And that's your Final, with {self.away_team.name} winning {away_score} to {home_score}"
             )
+            self.winner = self.away_team
+            self.loser = self.home_team
         else:
             print(
                 f"Wow, what an even game! That's it for us here, with {self.away_team.name} and {self.home_team.name} ending in a tied game, knotted up at {home_score} "

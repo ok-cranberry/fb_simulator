@@ -1,14 +1,20 @@
 from team import Team
 from game import Game
+from league import League
 
 
 def main():
 
-    home_team = Team("Frazier")
-    away_team = Team("Geibel")
+    conference = League(
+        (
+            Team("Frazier"),
+            Team("Geibel"),
+            Team("Monessen"),
+            Team("West Greene"),
+        )
+    )
 
-    game = Game(home_team, away_team)
-    game.game()
+    conference.start_season()
 
 
 if __name__ == "__main__":
