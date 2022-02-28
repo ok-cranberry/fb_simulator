@@ -2,8 +2,8 @@ To Dos:
 
 [O] implement cointoss in a Game
 [] add running play functionality
-[] add a season class, with multiple games
-[] track an individual's stats
+[X] add a season class, with multiple games
+[X] track an individual's stats
 [X] add clock functionality (2/17/22)
 [] create basic game loop, to/ start games, check player stats btw, etc
 [] setup testing framework to start verifying methods work

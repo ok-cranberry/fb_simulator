@@ -1,5 +1,6 @@
 from game import Game
 
+
 class Season:
     def __init__(self, schedule):
 
@@ -11,7 +12,7 @@ class Season:
 
         for team in matchup:
             if team not in self.standings:
-                self.standings[team] = [0,0,0]
+                self.standings[team] = [0, 0, 0]
 
             if team == winner:
                 self.standings[team][0] += 1
@@ -20,7 +21,6 @@ class Season:
                     self.standings[team][2] += 1
                 else:
                     self.standings[team][1] += 1
-
 
     def play_season(self):
 
@@ -33,14 +33,3 @@ class Season:
                 game.game()
 
                 self.modify_standings(matchup, game.winner)
-                # if game.winner in self.standings:
-                #     self.standings[game.winner] += 1
-                # else:
-                #     if game.winner is None:
-                #         pass
-                #     else:
-                #         self.standings[game.winner] = 1
-
-    # season standings
-
-    # crown season champion

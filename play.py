@@ -51,6 +51,14 @@ class Play:
             yards_gained = int(avg_outcome * 5)
             # will need to modify to take a distribution into account or to change the weights
             print(f"That's a gain of {yards_gained}")
+
+            # update stats
+            quarterback.passing_yards += yards_gained
+            quarterback.completions += 1
+            quarterback.passing_attempts += 1
+            wide_receiver.receptions += 1
+            wide_receiver.receiving_yards += yards_gained
+
             self.clock.play_duration(12)
         elif avg_outcome <= -1:
             print(
@@ -59,10 +67,18 @@ class Play:
             self.clock.play_duration(12)
             turnover = True
             # Function for Return Yards
+
+            # update stats
+            quarterback.passing_attempts += 1
+            defensive_back.interceptions += 1
+
         elif avg_outcome > -1 and avg_outcome <= 1:
             print(f"It's incomplete!")
             yards_gained = 0
             self.clock.play_duration(8)
+
+            # update stats
+            quarterback.passing_attempts += 1
 
         return yards_gained, turnover
 

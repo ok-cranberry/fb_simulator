@@ -1,5 +1,4 @@
 from team import Team
-from game import Game
 from league import League
 
 
@@ -15,6 +14,7 @@ def main():
     )
 
     conference.start_season()
+    conference.season_stats()
 
 
 if __name__ == "__main__":
