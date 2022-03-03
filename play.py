@@ -1,14 +1,7 @@
+import offense
 import random
 from team import Team
 from clock import GameClock
-
-
-def weights(nominal_weight):
-    """Adds a random fudge factor to a play contribution weights
-    nominal_weight : float - between 0-1
-    """
-
-    return nominal_weight * random.gauss(0.5, 1 / 3)
 
 
 class Play:
@@ -29,60 +22,19 @@ class Play:
 
     def action(self, quarterback, wide_receiver, defensive_back):
 
-        turnover = False
-        yards_gained = 0
-
-        print("It's a pass!")
-        i = 0
-        play_outcomes = []
-        while i < 100:
-            outcome = (
-                weights(0.6) * quarterback.accuracy
-                + weights(0.4) * wide_receiver.catching
-                - weights(0.5) * defensive_back.coverage
+        playcall = random.randint(1, 2)
+        if playcall == 1:
+            yards_gained, turnover = offense.pass_play(
+                self.offense, self.defense, self.clock
             )
-            play_outcomes.append(outcome)
-            i += 1
-
-        avg_outcome = sum(play_outcomes) / len(play_outcomes)
-
-        if avg_outcome > 1:
-            print(f"It's caught by {wide_receiver.name}!!")
-            yards_gained = int(avg_outcome * 5)
-            # will need to modify to take a distribution into account or to change the weights
-            print(f"That's a gain of {yards_gained}")
-
-            # update stats
-            quarterback.passing_yards += yards_gained
-            quarterback.completions += 1
-            quarterback.passing_attempts += 1
-            wide_receiver.receptions += 1
-            wide_receiver.receiving_yards += yards_gained
-
-            self.clock.play_duration(12)
-        elif avg_outcome <= -1:
-            print(
-                f"{quarterback.name} is intercepted by {defensive_back.name}!!"
+        else:
+            yards_gained, turnover = offense.running_play(
+                self.offense, self.defense, self.clock
             )
-            self.clock.play_duration(12)
-            turnover = True
-            # Function for Return Yards
-
-            # update stats
-            quarterback.passing_attempts += 1
-            defensive_back.interceptions += 1
-
-        elif avg_outcome > -1 and avg_outcome <= 1:
-            print(f"It's incomplete!")
-            yards_gained = 0
-            self.clock.play_duration(8)
-
-            # update stats
-            quarterback.passing_attempts += 1
 
         return yards_gained, turnover
 
-    def run_play(self):
+    def start_play(self):
         self.presnap(self.offense.quarterback)
         if not self.clock.get_current_time() <= 0:
             return self.action(

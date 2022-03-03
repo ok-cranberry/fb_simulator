@@ -8,6 +8,7 @@ class Player:
         self.completions = 0
         self.passing_attempts = 0
         self.passing_touchdowns = 0
+        self.rushing_yards = 0
         self.receptions = 0
         self.receiving_yards = 0
         self.interceptions = 0
@@ -19,10 +20,22 @@ class Quarterback(Player):
         setattr(self, "accuracy", random.randrange(1, 20))
 
 
+class RunningBack(Player):
+    def __init__(self, name):
+        super().__init__(name)
+        setattr(self, "speed", random.randrange(1, 20))
+
+
 class WideReceiver(Player):
     def __init__(self, name):
         super().__init__(name)
         setattr(self, "catching", random.randrange(1, 20))
+
+
+class Linebacker(Player):
+    def __init__(self, name):
+        super().__init__(name)
+        setattr(self, "tackling", random.randrange(1, 20))
 
 
 class DefensiveBack(Player):

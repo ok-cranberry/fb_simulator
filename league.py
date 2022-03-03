@@ -39,6 +39,7 @@ class League:
         league_quarterbacks = []
         league_wide_receivers = []
         league_defensive_backs = []
+        league_running_backs = []
 
         for team in self.teams:
             league_quarterbacks.append(
@@ -67,9 +68,16 @@ class League:
                     }
                 }
             )
+            league_running_backs.append(
+                {
+                    team.running_back.name: {
+                        "rushing_yards": team.running_back.rushing_yards,
+                    }
+                }
+            )
 
-        # for qb in league_quarterbacks:
-        #     print(qb)
-        #
-        # for db in league_defensive_backs:
-        #     print(db)
+        for qb in league_quarterbacks:
+            print(qb)
+
+        for rb in league_running_backs:
+            print(rb)

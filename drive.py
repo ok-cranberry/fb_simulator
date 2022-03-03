@@ -49,7 +49,7 @@ class Drive:
             play = p.Play(
                 self.current_yardline, self.offense, self.defense, self.clock
             )
-            yards_gained, turnover = play.run_play()
+            yards_gained, turnover = play.start_play()
             self.drive_yardage += yards_gained
 
             self.current_yardline = self.update_distance(
