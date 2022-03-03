@@ -20,7 +20,7 @@ class Play:
         print(self.clock.format_clock())
         self.clock.intra_play_duration(30)
 
-    def action(self, quarterback, wide_receiver, defensive_back):
+    def action(self):
 
         playcall = random.randint(1, 2)
         if playcall == 1:
@@ -37,11 +37,7 @@ class Play:
     def start_play(self):
         self.presnap(self.offense.quarterback)
         if not self.clock.get_current_time() <= 0:
-            return self.action(
-                self.offense.quarterback,
-                self.offense.wide_receiver,
-                self.defense.defensive_back,
-            )
+            return self.action()
         else:
             print("Oh they couldn't get the play off in time")
             return (0, False)
