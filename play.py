@@ -13,10 +13,12 @@ class Play:
 
         yards_gained = 0
 
-    def presnap(self, quarterback):
+    def presnap(self):
         """TODO: Add functionality for the teams to apply some weight to the ensuing play"""
 
-        print(f"{quarterback.name} brings his team up to the line")
+        print(
+            f"{self.offense.quarterback.name} brings his team up to the line"
+        )
         print(self.clock.format_clock())
         self.clock.intra_play_duration(30)
 
@@ -35,7 +37,7 @@ class Play:
         return yards_gained, turnover
 
     def start_play(self):
-        self.presnap(self.offense.quarterback)
+        self.presnap()
         if not self.clock.get_current_time() <= 0:
             return self.action()
         else:

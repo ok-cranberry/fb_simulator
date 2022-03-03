@@ -1,6 +1,6 @@
-import play as p
-from team import Team
 from clock import GameClock
+from play import Play
+from team import Team
 
 
 class Drive:
@@ -46,7 +46,7 @@ class Drive:
 
         while end_of_drive is False:
             print(f"It's {down} down and {yards_to_1st_down}")
-            play = p.Play(
+            play = Play(
                 self.current_yardline, self.offense, self.defense, self.clock
             )
             yards_gained, turnover = play.start_play()

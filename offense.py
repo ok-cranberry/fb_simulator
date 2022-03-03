@@ -17,9 +17,9 @@ def play_outcomes():
     play_outcomes = []
     while i < 100:
         outcome = (
-            weights(0.6) * offense.quarterback.accuracy
-            + weights(0.4) * offense.wide_receiver.catching
-            - weights(0.5) * defense.defensive_back.coverage
+            # weights(0.6) * offense.quarterback.accuracy
+            # + weights(0.4) * offense.wide_receiver.catching
+            # - weights(0.5) * defense.defensive_back.coverage
         )
         play_outcomes.append(outcome)
         i += 1

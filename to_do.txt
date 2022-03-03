@@ -1,7 +1,7 @@
 To Dos:
 
 [O] implement cointoss in a Game
-[X] add running play functionality
+[X] add running play functionality (3/3/22)
 [X] add a season class, with multiple games
 [X] track an individual's stats
 [X] add clock functionality (2/17/22)
@@ -9,3 +9,5 @@ To Dos:
 [] setup testing framework to start verifying methods work
 [] add ordinal endings to numbers (1st, 2nd, 3rd, etc)
 [] implement kickoffs into the game
+[] rebalance offensive play weights
+[] add team attributes to impact play outcomes
