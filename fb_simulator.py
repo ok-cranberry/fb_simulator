@@ -22,11 +22,10 @@ class FootballSimulator:
         )
         self.dt, self.prev_time = 0, 0
         self.actions = {"mouse_click": False}
-
         self.game_running = True
-
         self.state_stack = []
         self.load_states()
+        self.player_team = None
 
     def game_loop(self):
         while self.game_running:

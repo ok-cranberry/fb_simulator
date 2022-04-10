@@ -46,6 +46,7 @@ class MenuButton(pygame.sprite.Sprite):
         if self.fb_simulator.actions["mouse_click"]:
             if self.mouse_is_over():
                 print("button click")
+                pygame.time.wait(200)
                 return True
         else:
             return False
