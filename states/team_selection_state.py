@@ -25,7 +25,7 @@ class TeamSelectionState(GameState):
             "Geibel", (100, 250), self.fb_simulator
         )
         self.team_3_button = MenuButton(
-            "Monesson", (100, 300), self.fb_simulator
+            "Monessen", (100, 300), self.fb_simulator
         )
         self.team_4_button = MenuButton(
             "West Greene", (100, 350), self.fb_simulator

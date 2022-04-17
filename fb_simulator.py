@@ -33,6 +33,7 @@ class FootballSimulator:
             self.get_events()
             self.update()
             self.render()
+            # print(self.state_stack)
 
     def get_events(self):
         for event in pygame.event.get():

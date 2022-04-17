@@ -1,5 +1,6 @@
-from states.game_state import GameState
 from menu_button import MenuButton
+from states.football_game_state import FootballGameState
+from states.game_state import GameState
 
 
 class TeamOverviewState(GameState):
@@ -37,8 +38,21 @@ class TeamOverviewState(GameState):
             self.fb_simulator,
         )
 
+        self.next_game_banner = MenuButton(
+            "Next Game:",
+            (250, 100),
+            self.fb_simulator,
+        )
+        self.next_game_button = MenuButton(
+            "Start Game:",
+            (250, 150),
+            self.fb_simulator,
+        )
+
     def update(self, delta_time):
-        pass
+        if self.next_game_button.click():
+            new_state = FootballGameState(self.fb_simulator)
+            new_state.enter_state()
 
     def render(self, window):
         window.fill((0, 0, 0))
@@ -49,3 +63,5 @@ class TeamOverviewState(GameState):
         self.wide_receiver_button.draw(window)
         self.linebacker_button.draw(window)
         self.defensive_back_button.draw(window)
+        self.next_game_banner.draw(window)
+        self.next_game_button.draw(window)
