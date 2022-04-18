@@ -2,20 +2,32 @@ import offense
 import random
 from team import Team
 from clock import GameClock
+from announcer import Announcer
 
 
 class Play:
-    def __init__(self, line_of_scrimmage, offense, defense, clock: GameClock):
+    def __init__(
+        self,
+        line_of_scrimmage,
+        offense,
+        defense,
+        clock: GameClock,
+        announcer: Announcer,
+    ):
         self.line_of_scrimmage = line_of_scrimmage
         self.offense = offense
         self.defense = defense
         self.clock = clock
+        self.announcer = announcer
 
         yards_gained = 0
 
     def presnap(self):
         """TODO: Add functionality for the teams to apply some weight to the ensuing play"""
 
+        self.announcer.store_commentary(
+            f"{self.offense.quarterback.name} brings his team up to the line"
+        )
         print(
             f"{self.offense.quarterback.name} brings his team up to the line"
         )

@@ -4,6 +4,7 @@ from states.game_state import GameState
 from team import Team
 from play import Play
 from clock import GameClock
+from announcer import Announcer
 
 
 class FootballGameState(GameState):
@@ -15,6 +16,8 @@ class FootballGameState(GameState):
         # TODO: properly place temporary GameClock
         self.clock = GameClock()
 
+        self.announcer = Announcer()
+
         # self.game = Game(self.fb_simulator.player_team, self.fb_simulator.other_team)
         # self.game.game()
         self.play = Play(
@@ -22,6 +25,7 @@ class FootballGameState(GameState):
             self.fb_simulator.player_team,
             self.fb_simulator.other_team,
             self.clock,
+            self.announcer,
         )
         self.play.start_play()
 
@@ -36,7 +40,7 @@ class FootballGameState(GameState):
         #     self.fb_simulator,
         # )
         self.game_log_banner = MenuButton(
-            "Stuff is happening", (100, 200), self.fb_simulator
+            self.announcer.return_commentary(), (100, 200), self.fb_simulator
         )
 
     def update(self, delta_time):
