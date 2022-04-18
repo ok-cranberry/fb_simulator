@@ -2,26 +2,48 @@ from game import Game
 from menu_button import MenuButton
 from states.game_state import GameState
 from team import Team
+from play import Play
+from clock import GameClock
 
 
 class FootballGameState(GameState):
     def __init__(self, fb_simulator):
         GameState.__init__(self, fb_simulator)
 
-        #TODO: Remove hardcoded team matchup
+        # TODO: Remove hardcoded team matchup
         self.fb_simulator.other_team = Team("Geibel")
-        self.game = Game(self.fb_simulator.player_team, self.fb_simulator.other_team)
-        self.game.game()
+        # TODO: properly place temporary GameClock
+        self.clock = GameClock()
 
-        self.game_matchup_banner = MenuButton(f"{self.fb_simulator.player_team.name} v { self.fb_simulator.other_team.name}", (100, 100), self.fb_simulator)
-        self.game_score_banner = MenuButton(f"{self.game.score[self.game.home_team]} - {self.game.score[self.game.away_team]}", (100,150), self.fb_simulator)
-        self.game_log_banner = MenuButton("Stuff is happening", (100,200),self.fb_simulator)
+        # self.game = Game(self.fb_simulator.player_team, self.fb_simulator.other_team)
+        # self.game.game()
+        self.play = Play(
+            20,
+            self.fb_simulator.player_team,
+            self.fb_simulator.other_team,
+            self.clock,
+        )
+        self.play.start_play()
+
+        # self.game_matchup_banner = MenuButton(
+        #     f"{self.fb_simulator.player_team.name} v { self.fb_simulator.other_team.name}",
+        #     (100, 100),
+        #     self.fb_simulator,
+        # )
+        # self.game_score_banner = MenuButton(
+        #     f"{self.game.score[self.game.home_team]} - {self.game.score[self.game.away_team]}",
+        #     (100, 150),
+        #     self.fb_simulator,
+        # )
+        self.game_log_banner = MenuButton(
+            "Stuff is happening", (100, 200), self.fb_simulator
+        )
 
     def update(self, delta_time):
         pass
 
     def render(self, window):
         window.fill((0, 0, 0))
-        self.game_matchup_banner.draw(window)
-        self.game_score_banner.draw(window)
+        # self.game_matchup_banner.draw(window)
+        # self.game_score_banner.draw(window)
         self.game_log_banner.draw(window)
