@@ -40,7 +40,10 @@ class FootballGameState(GameState):
         #     self.fb_simulator,
         # )
         self.game_log_banner = MenuButton(
-            self.announcer.return_commentary(), (100, 200), self.fb_simulator
+            self.announcer.return_commentary(),
+            (0, 200),
+            self.fb_simulator,
+            width=500,
         )
 
     def update(self, delta_time):

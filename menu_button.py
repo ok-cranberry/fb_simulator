@@ -2,12 +2,14 @@ import pygame
 
 
 class MenuButton(pygame.sprite.Sprite):
-    def __init__(self, msg: str, position: tuple, fb_simulator):
+    def __init__(
+        self, msg: str, position: tuple, fb_simulator, width=200, height=50
+    ):
         super(MenuButton, self).__init__()
         self.x = position[0]
         self.y = position[1]
-        self.width = 200
-        self.height = 50
+        self.width = width
+        self.height = height
         self.fill_color = (255, 255, 255)
         self.msg = msg
         self.position = position
