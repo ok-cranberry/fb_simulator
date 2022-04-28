@@ -39,6 +39,7 @@ class FootballGameState(GameState):
         #     (100, 150),
         #     self.fb_simulator,
         # )
+
         self.game_log_banner = MenuButton(
             self.announcer.return_commentary(),
             (0, 200),

@@ -20,7 +20,9 @@ class FootballSimulator:
         self.screen = pygame.display.set_mode(
             [self.SCREEN_WIDTH, self.SCREEN_HEIGHT]
         )
-        self.dt, self.prev_time = 0, 0
+        self.S_PER_UPDATE = 0.008
+        self.lag = 0
+        self.dt, self.prev_time = 0, time.time()
         self.actions = {"mouse_click": False}
         self.game_running = True
         self.state_stack = []
@@ -31,7 +33,10 @@ class FootballSimulator:
         while self.game_running:
             self.get_dt()
             self.get_events()
-            self.update()
+            while self.lag >= self.S_PER_UPDATE:
+                self.update()
+                self.lag -= self.S_PER_UPDATE
+
             self.render()
             # print(self.state_stack)
 
@@ -61,6 +66,7 @@ class FootballSimulator:
         now = time.time()
         self.dt = now - self.prev_time
         self.prev_time = now
+        self.lag += self.dt
 
     def load_states(self):
         self.main_menu = MainMenuState(self)
