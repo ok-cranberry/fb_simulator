@@ -103,3 +103,61 @@ class Game:
             self.score[self.home_team],
             self.score[self.away_team],
         )
+
+    def start_game(self):
+        # Coin toss
+        self.coin_toss()
+
+        # initialize the first drive
+        self.current_drive = Drive(
+            20,
+            self.opening_possession[0],
+            self.opening_possession[1],
+            self.clock,
+        )
+
+        # Starting Flavor Text "Blah will receive the ball first"
+        print("Start Game")
+
+    def continue_game(self):
+
+        print(self.clock.get_current_time())
+
+        if self.quarter <= 4:
+            if self.clock.get_current_time() > 0:
+                # next play
+                # maybe stash this in the Drive as continue_drive, and have the logic there
+                self.current_drive.continue_drive()
+                # check if change of possesion
+                if self.current_drive.end_of_drive is True:
+
+                    self.score[
+                        self.current_drive.offense
+                    ] += self.current_drive.score
+                    self.print_score()
+
+                    self.yardage[
+                        self.current_drive.offense
+                    ] += self.current_drive.drive_yardage
+
+                    starting_yardline = self.find_starting_yardline(
+                        self.current_drive
+                    )
+
+                    self.prev_drive = self.current_drive
+                    self.current_drive = Drive(
+                        starting_yardline,
+                        self.prev_drive.defense,
+                        self.prev_drive.offense,
+                        self.clock,
+                    )
+            else:
+                self.quarter += 1
+                self.clock.reset_clock_for_quarter()
+                if self.quarter == 3:
+                    pass
+                    # announer annouces halftime
+        else:
+            pass
+            # end of game
+            # post game displays

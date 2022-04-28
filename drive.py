@@ -13,8 +13,14 @@ class Drive:
         self.defense = defense
         self.clock = clock
 
+        self.end_of_drive = False
         self.drive_yardage = 0
         self.score = 0
+
+        self.turnover = False
+        self.yards_gained = 0
+        self.down = 1
+        self.yards_to_1st_down = 10
 
     def update_distance(self, line_of_scrimmage, yards_gained):
         """Update the down, distance, and score"""
@@ -36,7 +42,7 @@ class Drive:
 
     def drive(self):
 
-        end_of_drive = False
+        self.end_of_drive = False
         down = 1
         yards_to_1st_down = 10
         self.score = 0
@@ -60,7 +66,7 @@ class Drive:
             )
 
             if turnover is True:
-                end_of_drive = True
+                self.end_of_drive = True
             if down > 4:
                 print("That's a turnover on downs")
                 end_of_drive = True
@@ -70,3 +76,31 @@ class Drive:
                 end_of_drive = True
             if self.clock.get_current_time() is 0:
                 end_of_drive = True
+
+    def continue_drive(self):
+
+        if self.end_of_drive is False:
+            # output down and distance to screen
+            play = Play(
+                self.current_yardline, self.offense, self.defense, self.clock
+            )
+            self.yards_gained, self.turnover = play.start_play()
+
+            self.current_yardline = self.update_distance(
+                self.current_yardline, self.yards_gained
+            )
+            self.down, self.yards_to_1st_down = self.update_down(
+                self.down, self.yards_to_1st_down, self.yards_gained
+            )
+
+            if self.turnover is True:
+                self.end_of_drive = True
+            if self.down > 4:
+                print("That's a turnover on downs")
+                self.end_of_drive = True
+            if self.current_yardline >= 100:
+                print("TOUCHDOWN!!")
+                self.score += 7
+                self.end_of_drive = True
+            if self.clock.get_current_time() is 0:
+                self.end_of_drive = True
