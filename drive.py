@@ -1,3 +1,4 @@
+from announcer import Announcer
 from clock import GameClock
 from play import Play
 from team import Team
@@ -5,13 +6,19 @@ from team import Team
 
 class Drive:
     def __init__(
-        self, starting_yardline, offense: Team, defense: Team, clock: GameClock
+        self,
+        starting_yardline,
+        offense: Team,
+        defense: Team,
+        clock: GameClock,
+        announcer: Announcer,
     ):
         self.starting_yardline = starting_yardline
         self.current_yardline = starting_yardline
         self.offense = offense
         self.defense = defense
         self.clock = clock
+        self.announcer = announcer
 
         self.end_of_drive = False
         self.drive_yardage = 0
@@ -82,7 +89,11 @@ class Drive:
         if self.end_of_drive is False:
             # output down and distance to screen
             play = Play(
-                self.current_yardline, self.offense, self.defense, self.clock
+                self.current_yardline,
+                self.offense,
+                self.defense,
+                self.clock,
+                self.announcer,
             )
             self.yards_gained, self.turnover = play.start_play()
 
@@ -96,9 +107,11 @@ class Drive:
             if self.turnover is True:
                 self.end_of_drive = True
             if self.down > 4:
+                self.announcer.store_commentary("That's a turnover on downs")
                 print("That's a turnover on downs")
                 self.end_of_drive = True
             if self.current_yardline >= 100:
+                self.announcer.store_commentary("TOUCHDOWN!!")
                 print("TOUCHDOWN!!")
                 self.score += 7
                 self.end_of_drive = True

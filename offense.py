@@ -1,4 +1,5 @@
 import random
+from announcer import Announcer
 from clock import GameClock
 from team import Team
 
@@ -9,6 +10,7 @@ def weights(nominal_weight):
     """
 
     return nominal_weight * random.gauss(0.5, 1 / 3)
+
 
 def play_outcomes():
     # determines the play outcome by averaging the results of 100 instances
@@ -26,12 +28,16 @@ def play_outcomes():
 
     return sum(play_outcomes) / len(play_outcomes)
 
-def pass_play(offense: Team, defense: Team, clock: GameClock):
+
+def pass_play(
+    offense: Team, defense: Team, clock: GameClock, announcer: Announcer
+):
     # basic pass play by the Offense
 
     turnover = False
     yards_gained = 0
 
+    announcer.store_commentary("It's a pass!")
     print("It's a pass!")
     i = 0
     play_outcomes = []
@@ -47,9 +53,13 @@ def pass_play(offense: Team, defense: Team, clock: GameClock):
     avg_outcome = sum(play_outcomes) / len(play_outcomes)
 
     if avg_outcome > 1:
+        announcer.store_commentary(
+            f"It's caught by {offense.wide_receiver.name}!!"
+        )
         print(f"It's caught by {offense.wide_receiver.name}!!")
         yards_gained = int(avg_outcome * 5)
         # will need to modify to take a distribution into account or to change the weights
+        announcer.store_commentary(f"That's a gain of {yards_gained}")
         print(f"That's a gain of {yards_gained}")
 
         # update stats
@@ -61,6 +71,9 @@ def pass_play(offense: Team, defense: Team, clock: GameClock):
 
         clock.play_duration(12)
     elif avg_outcome <= -1:
+        announcer.store_commentary(
+            f"{offense.quarterback.name} is intercepted by {defense.defensive_back.name}!!"
+        )
         print(
             f"{offense.quarterback.name} is intercepted by {defense.defensive_back.name}!!"
         )
@@ -73,6 +86,7 @@ def pass_play(offense: Team, defense: Team, clock: GameClock):
         defense.defensive_back.interceptions += 1
 
     elif avg_outcome > -1 and avg_outcome <= 1:
+        announcer.store_commentary(f"It's incomplete!")
         print(f"It's incomplete!")
         yards_gained = 0
         clock.play_duration(8)
@@ -83,13 +97,20 @@ def pass_play(offense: Team, defense: Team, clock: GameClock):
     return yards_gained, turnover
 
 
-def running_play(offense: Team, defense: Team, clock: GameClock):
+def running_play(
+    offense: Team, defense: Team, clock: GameClock, announcer: Announcer
+):
     # basic running play by the Offense
 
     turnover = False
     yards_gained = 0
 
-    print(f"{offense.quarterback.name} hands the ball off to {offense.running_back.name}!")
+    announcer.store_commentary(
+        f"{offense.quarterback.name} hands the ball off to {offense.running_back.name}!"
+    )
+    print(
+        f"{offense.quarterback.name} hands the ball off to {offense.running_back.name}!"
+    )
     i = 0
     play_outcomes = []
     while i < 100:
@@ -102,11 +123,13 @@ def running_play(offense: Team, defense: Team, clock: GameClock):
 
     avg_outcome = sum(play_outcomes) / len(play_outcomes)
 
-
+    announcer.store_commentary(
+        f"{offense.running_back.name} takes it off tackle.."
+    )
     print(f"{offense.running_back.name} takes it off tackle..")
     yards_gained = int(avg_outcome * 3)
     # will need to modify to take a distribution into account or to change the weights
-    if yards_gained >0:
+    if yards_gained > 0:
         print(f"That's a gain of {yards_gained}")
     elif yards_gained is 0:
         print(f"He'stopped at the line by {defense.linebacker.name}")

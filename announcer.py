@@ -2,6 +2,7 @@ class Announcer:
     """
     Serves as the game log, outputing game events to the game loop for display on screen
     """
+
     def __init__(self):
         self.game_log = []
 
@@ -10,4 +11,7 @@ class Announcer:
 
     def return_commentary(self):
 
-        return self.game_log.pop()
+        if self.game_log:
+            return self.game_log[-1]
+        else:
+            return "-"

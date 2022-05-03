@@ -1,3 +1,4 @@
+from announcer import Announcer
 from drive import Drive
 from team import Team
 import clock
@@ -5,9 +6,10 @@ import random
 
 
 class Game:
-    def __init__(self, home_team, away_team):
+    def __init__(self, home_team, away_team, announcer):
         self.home_team = home_team
         self.away_team = away_team
+        self.announcer = announcer
 
         self.score = {self.home_team: 0, self.away_team: 0}
         self.yardage = {self.home_team: 0, self.away_team: 0}
@@ -116,14 +118,13 @@ class Game:
             self.opening_possession[0],
             self.opening_possession[1],
             self.clock,
+            self.announcer,
         )
 
         # Starting Flavor Text "Blah will receive the ball first"
         print("Start Game")
 
     def continue_game(self):
-
-        print(self.clock.get_current_time())
 
         if self.quarter <= 4:
             if self.clock.get_current_time() > 0:
@@ -152,6 +153,7 @@ class Game:
                         self.prev_drive.defense,
                         self.prev_drive.offense,
                         self.clock,
+                        self.announcer,
                     )
             else:
                 self.quarter += 1

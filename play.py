@@ -12,22 +12,22 @@ class Play:
         offense,
         defense,
         clock: GameClock,
-        # announcer: Announcer,
+        announcer: Announcer,
     ):
         self.line_of_scrimmage = line_of_scrimmage
         self.offense = offense
         self.defense = defense
         self.clock = clock
-        # self.announcer = announcer
+        self.announcer = announcer
 
         yards_gained = 0
 
     def presnap(self):
         """TODO: Add functionality for the teams to apply some weight to the ensuing play"""
 
-        # self.announcer.store_commentary(
-        #     f"{self.offense.quarterback.name} brings his team up to the line"
-        # )
+        self.announcer.store_commentary(
+            f"{self.offense.quarterback.name} brings his team up to the line"
+        )
         print(
             f"{self.offense.quarterback.name} brings his team up to the line"
         )
@@ -39,11 +39,11 @@ class Play:
         playcall = random.randint(1, 2)
         if playcall == 1:
             yards_gained, turnover = offense.pass_play(
-                self.offense, self.defense, self.clock
+                self.offense, self.defense, self.clock, self.announcer
             )
         else:
             yards_gained, turnover = offense.running_play(
-                self.offense, self.defense, self.clock
+                self.offense, self.defense, self.clock, self.announcer
             )
 
         return yards_gained, turnover
