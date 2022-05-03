@@ -18,6 +18,8 @@ class Game:
         self.winner = None
         self.loser = None
 
+        self.end_of_game = False
+
     def coin_toss(self):
         flip = random.randint(0, 1)
         if flip == 0:
@@ -158,6 +160,10 @@ class Game:
                     pass
                     # announer annouces halftime
         else:
-            pass
+            self.final_score(
+                self.score[self.home_team],
+                self.score[self.away_team],
+            )
+            self.end_of_game = True
             # end of game
             # post game displays

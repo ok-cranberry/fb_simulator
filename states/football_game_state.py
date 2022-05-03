@@ -1,6 +1,7 @@
 from game import Game
 from menu_button import MenuButton
 from states.game_state import GameState
+from states.game_end_state import GameEndState
 from team import Team
 from play import Play
 from clock import GameClock
@@ -54,6 +55,9 @@ class FootballGameState(GameState):
     def update(self, delta_time):
         self.game.continue_game()
         time.sleep(1)
+        if self.game.end_of_game is True:
+            new_state = GameEndState(self.fb_simulator)
+            new_state.enter_state()
 
     def render(self, window):
         window.fill((0, 0, 0))

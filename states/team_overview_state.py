@@ -44,7 +44,7 @@ class TeamOverviewState(GameState):
             self.fb_simulator,
         )
         self.next_game_button = MenuButton(
-            "Start Game:",
+            "Start Game",
             (250, 150),
             self.fb_simulator,
         )
