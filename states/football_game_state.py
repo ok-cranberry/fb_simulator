@@ -44,7 +44,21 @@ class FootballGameState(GameState):
             width=500,
         )
 
+        self.game_clock_banner = MenuButton(
+            self.game.clock.format_clock(),
+            (150, 250),
+            self.fb_simulator,
+        )
+
+        self.game_quarter_banner = MenuButton(
+            f"Q{self.game.quarter}",
+            (150, 300),
+            self.fb_simulator,
+        )
+
     def update(self, delta_time):
+        # self.game.clock.clock_countdown()
+
         self.game_matchup_banner = MenuButton(
             f"{self.fb_simulator.player_team.name} v { self.fb_simulator.other_team.name}",
             (100, 100),
@@ -63,6 +77,18 @@ class FootballGameState(GameState):
             width=500,
         )
 
+        self.game_clock_banner = MenuButton(
+            self.game.clock.format_clock(),
+            (150, 250),
+            self.fb_simulator,
+        )
+
+        self.game_quarter_banner = MenuButton(
+            f"Q{self.game.quarter}",
+            (150, 300),
+            self.fb_simulator,
+        )
+
         if self.game_matchup_banner.click():
             self.game.continue_game()
         # time.sleep(1)
@@ -75,3 +101,5 @@ class FootballGameState(GameState):
         self.game_matchup_banner.draw(window)
         self.game_score_banner.draw(window)
         self.game_log_banner.draw(window)
+        self.game_clock_banner.draw(window)
+        self.game_quarter_banner.draw(window)

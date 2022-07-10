@@ -5,7 +5,7 @@ To Dos:
 [X] add a season class, with multiple games
 [X] track an individual's stats
 [X] add clock functionality (2/17/22)
-[] create basic game loop, to/ start games, check player stats btw, etc
+[O] create basic game loop, to/ start games, check player stats btw, etc
 [] setup testing framework to start verifying methods work
 [] add ordinal endings to numbers (1st, 2nd, 3rd, etc)
 [] implement kickoffs into the game
